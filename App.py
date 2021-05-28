@@ -3,6 +3,7 @@ from Setting import *
 from helper import *
 from Mariko import *
 from Red import *
+from Black import *
 
 pygame.init()
 
@@ -80,6 +81,7 @@ class App:
                 self.draw()
                 self.mariko.draw()
                 self.Red.draw()
+                self.Black.draw()
 
                 self.playingEvent()
                 self.playingUpdate()
@@ -112,8 +114,8 @@ class App:
 
     def LoadAgents(self):
         self.mariko = Mariko(self, 8, 26)
-        self.Red = Red(self, 40, 6)
-
+        self.Red = Red(self, 20, 6)
+        self.Black = Black(self, 40, 6)
 
     ##############################################
     ###########   Playing Module Here  ###########
@@ -146,5 +148,5 @@ class App:
     def playingUpdate(self):
         self.mariko.Update()
         self.Red.Update()
- 
+        self.Black.Update()
 

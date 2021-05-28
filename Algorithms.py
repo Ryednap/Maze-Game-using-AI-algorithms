@@ -73,6 +73,9 @@ class Pair:
         return Pair(self.f - other.f, self.s - other.s)
     def __mul__ (self, x):
         return Pair(self.f * x, self.s * x)
+    
+    def __truediv__ (self, x):
+        return Pair(self.f / x, self.s / x)
 
     def __isadd__(self,other):
         self.f += other.f
@@ -170,7 +173,7 @@ class Astar:
             "TARGET: ", self.target,
             "DISTANCE: ", answer
         )
-        path = Path([], answer)
+        path = Path([], currentBest)
         curr = self.target
         while (curr != Pair(-1, -1)):
             path.append(curr)

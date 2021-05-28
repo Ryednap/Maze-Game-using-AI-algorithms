@@ -32,9 +32,9 @@ def Euclidean(a, b, x, y, D = 1):
 
 
 class Path :
-    def __init__(self, path, totalCost):
+    def __init__(self, path, costTable):
         self.path = path
-        self.totalCost = totalCost
+        self.costTable = costTable
     
     def pop(self):
         return self.path.pop()
@@ -58,6 +58,5 @@ class Path :
     
     def __eq__(self, other):
         return(
-            self.path == other.path and
-            self.totalCost == other.totalCost
+            self.path == other.path
         )
