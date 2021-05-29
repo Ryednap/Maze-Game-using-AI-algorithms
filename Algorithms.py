@@ -249,20 +249,94 @@ class BFS:
 class UCS:
     def __init__(self, grid, start, target):
         self.grid = grid
-        self.start = start
-        self.target = target
+        self.start = self.xySwap(start)
+        self.target = self.xySwap(target)
 
+    def xySwap(self, p):
+        return Pair(p.y, p.x)
+
+    def Valid(self, x, y):
+        if(x < 0 or y < 0):
+            return False
+        if(x >= len(self.grid) or y >= len(self.grid[0])):
+            return False
+        if(self.grid[x][y] == '1' or self.grid[x][y] == '2'):
+            return True
+        return False
+
+    def optimalPath(self):
+        ## WRITE YOUR CODE HERE ##
+        pass
+
+    
 class greedyBFS:
     def __init__(self, grid, start, target):
         self.grid = grid
-        self.start = start
-        self.target = target
+        self.start = self.xySwap(start)
+        self.target = self.xySwap(target)
 
-class MiniMax:
+    def xySwap(self, p):
+        return Pair(p.y, p.x)
+
+    def Valid(self, x, y):
+        if(x < 0 or y < 0):
+            return False
+        if(x >= len(self.grid) or y >= len(self.grid[0])):
+            return False
+        if(self.grid[x][y] == '1' or self.grid[x][y] == '2'):
+            return True
+        return False
+
+    def optimalPath(self):
+        ## WRITE YOUR CODE HERE ##
+        pass
+
+class recursiveBFS:
     def __init__(self, grid, start, target):
         self.grid = grid
-        self.start = start
-        self.target = target
+        self.start = self.xySwap(start)
+        self.target = self.xySwap(target)
+
+    def xySwap(self, p):
+        return Pair(p.y, p.x)
+
+    def Valid(self, x, y):
+        if(x < 0 or y < 0):
+            return False
+        if(x >= len(self.grid) or y >= len(self.grid[0])):
+            return False
+        if(self.grid[x][y] == '1' or self.grid[x][y] == '2'):
+            return True
+        return False
+
+    def optimalPath(self):
+        ## WRITE YOUR CODE HERE ##
+        pass
+
+
+class MniMax:
+    def __init__(self, grid, start, target):
+        self.grid = grid
+        self.start = self.xySwap(start)
+        self.target = self.xySwap(target)
+
+    def xySwap(self, p):
+        return Pair(p.y, p.x)
+
+    def Valid(self, x, y):
+        if(x < 0 or y < 0):
+            return False
+        if(x >= len(self.grid) or y >= len(self.grid[0])):
+            return False
+        if(self.grid[x][y] == '1' or self.grid[x][y] == '2'):
+            return True
+        return False
+
+    def optimalPath(self):
+        ## WRITE YOUR CODE HERE ##
+        pass
+
+
     
 
 
