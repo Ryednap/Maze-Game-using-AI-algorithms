@@ -48,7 +48,10 @@ class Path :
 
     def reverse(self):
         self.path.reverse()
-
+    
+    def isEmpty(self):
+        return len(self.path) == 0
+        
     def __str__(self):
         s = ""
         for el in self.path:

@@ -246,14 +246,24 @@ class BFS:
         
 
     
-
-
 class UCS:
     def __init__(self, grid, start, target):
         self.grid = grid
         self.start = start
         self.target = target
 
+class greedyBFS:
+    def __init__(self, grid, start, target):
+        self.grid = grid
+        self.start = start
+        self.target = target
+
+class MiniMax:
+    def __init__(self, grid, start, target):
+        self.grid = grid
+        self.start = start
+        self.target = target
+    
 
 
 """ 
@@ -285,5 +295,5 @@ class Test:
         astar = BFS(grid, src, dest)
         path = astar.optimalPath()
         print(path)
-        print(path.totalCost)
+       
 

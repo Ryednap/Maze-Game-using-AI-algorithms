@@ -14,7 +14,7 @@ class Black:
         self.deadCount = 0
         self.turn = 0
         self.bestPath = Path([], OO)
-
+        self.AstarTick = 3
         self.load()
 
     
@@ -29,11 +29,13 @@ class Black:
             self.image_right.append(Get("Redright_" + str(i + 1)))
 
     def updateBestPath(self, curr, target):
-        astar =  BFS(self.App.grid, curr, target)
+        astar =  Astar(self.App.grid, curr, target)
         maybe = astar.optimalPath()
-        
-        self.bestPath = maybe
-
+        if(self.bestPath.isEmpty() or self.AstarTick == 0):
+            self.bestPath = maybe
+            self.AstarTick = 3
+        else :
+            self.AstarTick -= 1
 
     def Update(self):
 
