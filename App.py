@@ -4,6 +4,9 @@ from helper import *
 from Mariko import *
 from Red import *
 from Black import *
+from fellow import *
+from pinky import *
+from Blue import *
 
 pygame.init()
 
@@ -81,6 +84,9 @@ class App:
                 self.draw()
                 self.mariko.draw()
                 self.Red.draw()
+                self.Blue.draw()
+                self.Fellow.draw()
+                self.Pinky.draw()
                 self.Black.draw()
 
                 self.playingEvent()
@@ -116,6 +122,10 @@ class App:
         self.mariko = Mariko(self, 8, 26)
         self.Red = Red(self, 20, 6)
         self.Black = Black(self, 40, 6)
+        self.Blue = Blue(self, 21, 6)
+        self.Fellow = Fellow(self, 22, 6)
+        self.Pinky = Pinky(self, 23, 6)
+
 
     ##############################################
     ###########   Playing Module Here  ###########
@@ -149,4 +159,7 @@ class App:
         self.mariko.Update()
         self.Red.Update()
         self.Black.Update()
+        self.Blue.Update()
+        self.Pinky.Update()
+        self.Fellow.Update()
 

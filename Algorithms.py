@@ -244,8 +244,6 @@ class BFS:
        # print(path)
         return path 
         
-
-    
 class UCS:
     def __init__(self, grid, start, target):
         self.grid = grid
@@ -263,14 +261,56 @@ class UCS:
         if(self.grid[x][y] == '1' or self.grid[x][y] == '2'):
             return True
         return False
+    
+    def Heuristic(self, x, y):
+         return Euclidean(x, y, self.target.x, self.target.y)
+        #return Manhattan(x, y, self.target.x, self.target.y)
 
     def optimalPath(self):
-        ## WRITE YOUR CODE HERE ##
-        pass
+        pq = PriorityQueue(Pair(Pair(0, 0), 0))
 
+        dist = [ [OO for _ in range(len(self.grid[i]))] for i in range(len(self.grid)) ]
+        parent = [ [Pair(-1, -1) for _ in range(len(self.grid[i]))] for i in range(len(self.grid))]
+
+        pq.push(Pair(self.start, 0))
+        dist[self.start.x][self.start.y] = 0
+
+        while(pq.isEmpty() == False):
+            node = pq.pop()
+            print(node)
+            for i in range(4):
+                RR = node.f.x + dx[i]
+                CC = node.f.y + dy[i]
+         
+                if(self.Valid(RR, CC)):
+                    cost = node.s + 1
+                    if(dist[RR][CC] > cost + self.Heuristic(RR, CC)):
+                        dist[RR][CC] = cost + self.Heuristic(RR, CC)
+                        parent[RR][CC] = node.f
+                        pq.push(Pair(Pair(RR, CC), cost))
+           
+
+        answer = dist[self.target.f][self.target.s]
+        assert(answer != OO)
+        print(
+            "START: ", self.start,
+            "TARGET: ", self.target,
+            "DISTANCE: ", answer
+        )
+        path = Path([], dist)
+        curr = self.target
+        while (curr != Pair(-1, -1)):
+            path.append(curr)
+            curr = parent[curr.x][curr.y]
+
+        path.pop()
+        path.xySwap()
+       # print(path)
+        return path 
+    
     
 class greedyBFS:
-    def __init__(self, grid, start, target):
+    def __init__ (self, grid, start, target):
         self.grid = grid
         self.start = self.xySwap(start)
         self.target = self.xySwap(target)
@@ -286,59 +326,54 @@ class greedyBFS:
         if(self.grid[x][y] == '1' or self.grid[x][y] == '2'):
             return True
         return False
-
-    def optimalPath(self):
-        ## WRITE YOUR CODE HERE ##
-        pass
-
-class recursiveBFS:
-    def __init__(self, grid, start, target):
-        self.grid = grid
-        self.start = self.xySwap(start)
-        self.target = self.xySwap(target)
-
-    def xySwap(self, p):
-        return Pair(p.y, p.x)
-
-    def Valid(self, x, y):
-        if(x < 0 or y < 0):
-            return False
-        if(x >= len(self.grid) or y >= len(self.grid[0])):
-            return False
-        if(self.grid[x][y] == '1' or self.grid[x][y] == '2'):
-            return True
-        return False
-
-    def optimalPath(self):
-        ## WRITE YOUR CODE HERE ##
-        pass
-
-
-class MniMax:
-    def __init__(self, grid, start, target):
-        self.grid = grid
-        self.start = self.xySwap(start)
-        self.target = self.xySwap(target)
-
-    def xySwap(self, p):
-        return Pair(p.y, p.x)
-
-    def Valid(self, x, y):
-        if(x < 0 or y < 0):
-            return False
-        if(x >= len(self.grid) or y >= len(self.grid[0])):
-            return False
-        if(self.grid[x][y] == '1' or self.grid[x][y] == '2'):
-            return True
-        return False
-
-    def optimalPath(self):
-        ## WRITE YOUR CODE HERE ##
-        pass
-
-
     
+    def Heuristic(self, x, y):
+         return Euclidean(x, y, self.target.x, self.target.y)
+        #return Manhattan(x, y, self.target.x, self.target.y)
+###################################################################################
+    def optimalPath(self):
+        ## WRITE YOUR CODE HERE ##
+        parent = [ [Pair(-1, -1) for _ in range(len(self.grid[i]))] for i in range(len(self.grid))]
+        used = [[False for _ in range(len(self.grid[i]))] for i in range(len(self.grid))]
 
+        Q = PriorityQueue(Pair(Pair(0, 0), 0))
+        Q.push(Pair(self.start, self.Heuristic(self.start.f, self.start.s)))
+        answer = -1
+
+        while (Q.isEmpty() == False):
+            node = Q.pop()
+            used[node.f.x][node.f.y] = True
+            if(node.f == self.target):
+                answer = node.s
+                break
+            
+            for i in range(4):
+                RR = node.f.x + dx[i]
+                CC = node.f.y + dy[i]
+                if(self.Valid(RR, CC) and used[RR][CC] == False):
+                    Q.push(Pair(Pair(RR, CC), self.Heuristic(RR, CC)))
+                    parent[RR][CC] = node.f
+                    used[RR][CC] = False
+
+        assert(answer != -1) # I mean answer should exist else we are screwed 
+        print(
+            "START: ", self.start,
+            "TARGET: ", self.target,
+            "DISTANCE: ", answer
+        )
+
+        path = Path([], answer)
+        curr = self.target
+        while (curr != Pair(-1, -1)):
+            path.append(curr)
+            curr = parent[curr.x][curr.y]
+
+        path.pop()
+        path.xySwap()
+       # print(path)
+        return path
+
+ 
 
 """ 
     Test class to test the algorithm locally before

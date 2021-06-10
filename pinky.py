@@ -1,11 +1,11 @@
 from Setting import *
 from helper import *
 from math import ceil
-from Algorithms import Astar, Pair, BFS
+from Algorithms import Astar, Pair, BFS, greedyBFS
 import pygame
 import random
 
-class Red:
+class Pinky:
     def __init__(self, App, x, y):
         self.App = App
         self.currPos = Pair(x, y)
@@ -14,7 +14,7 @@ class Red:
         self.deadCount = 0
         self.turn = 0
         self.bestPath = Path([], OO)
-
+        self.Tick = 3
         self.load()
 
     
@@ -23,15 +23,17 @@ class Red:
         self.image_right = []
 
         for i in range(4):
-            self.image_left.append(Get("Redleft_" + str(i + 1)))
+            self.image_left.append(Get("pinkleft_" + str(i + 1)))
         
         for i in range(4):
-            self.image_right.append(Get("Redright_" + str(i + 1)))
+            self.image_right.append(Get("pinkright_" + str(i + 1)))
 
     def updateBestPath(self, curr, target):
-        bfs =  BFS(self.App.grid, curr, target)
-        maybe = bfs.optimalPath()
-        self.bestPath = maybe
+        gbfs =  greedyBFS(self.App.grid, curr, target)
+        maybe = gbfs.optimalPath()
+        if(self.Tick == 0 or self.bestPath.isEmpty()):
+            self.bestPath = maybe
+        
 
 
     def Update(self):

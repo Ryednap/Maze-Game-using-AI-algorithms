@@ -23,10 +23,10 @@ class Black:
         self.image_right = []
 
         for i in range(4):
-            self.image_left.append(Get("Redleft_" + str(i + 1)))
+            self.image_left.append(Get("blackleft_" + str(i + 1)))
         
         for i in range(4):
-            self.image_right.append(Get("Redright_" + str(i + 1)))
+            self.image_right.append(Get("blackright_" + str(i + 1)))
 
     def updateBestPath(self, curr, target):
         astar =  Astar(self.App.grid, curr, target)
